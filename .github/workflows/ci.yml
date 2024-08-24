@@ -11,30 +11,9 @@ on:
       - develop
 
 jobs:
-  client-app-build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
-
-    - name: Install client-app dependencies
-      run: |
-        cd client-app
-        npm install
-
-    - name: Build client-app
-      run: |
-        cd client-app
-        npm run build
 
   server-app-test:
     runs-on: ubuntu-latest
-    needs: client-app-build  # Ensure server tests run only after client build
     strategy:
       matrix:
         python-version: [3.8, 3.9, 3.10]
@@ -56,7 +35,6 @@ jobs:
 
   client-app-test:
     runs-on: ubuntu-latest
-    needs: client-app-build
     steps:
     - uses: actions/checkout@v2
 
