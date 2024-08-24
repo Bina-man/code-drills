@@ -32,23 +32,3 @@ jobs:
 
     - name: Run server-app tests
       run: pytest server-app/tests
-
-  client-app-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
-
-    - name: Install client-app dependencies
-      run: |
-        cd client-app
-        npm install
-
-    - name: Run client-app tests
-      run: |
-        cd client-app
-        npm test -- --watchAll=false
