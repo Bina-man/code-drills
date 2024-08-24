@@ -14,3 +14,4 @@ def test_get_welcome_message_fail():
     # Fail case: Deliberately incorrect expectation to simulate a failing test
     result = get_welcome_message(is_authenticated=False)
     assert result == {"message": "Welcome to the Finance API"}  # This will fail
+
