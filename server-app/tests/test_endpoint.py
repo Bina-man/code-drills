@@ -3,7 +3,7 @@ import pytest
 from app.main import app
 from httpx import AsyncClient
 from datetime import datetime
-from app.config.balance_types import known_balance_types
+from config.balance_types import known_balance_types
 
 def check_balance_depth_data(data):
     """
