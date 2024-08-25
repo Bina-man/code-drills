@@ -1,6 +1,6 @@
 import asyncio
 import pytest
-from app.main import app
+from main import app
 from httpx import AsyncClient
 from datetime import datetime
 from config.balance_types import known_balance_types
