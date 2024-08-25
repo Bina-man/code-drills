@@ -49,7 +49,11 @@ This project is a backend service built using FastAPI. It provides API endpoints
 1. Clone the repository:
 
    ```bash
-   $ git clone https://github.com/your-repo/server-app.git
+   $ https://github.com/Bina-man/code-drills.git
+   $ cd code-drills
+   $ git fetch origin
+   $ git checkout -b production origin/production
+   $ git checkout production
    $ cd server-app
    ```
 
