@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import BalanceSheetTable from './components/BalanceSheetTable';
 import './App.css';
 
-function App() {
+const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/balance-sheet');
+  };
+
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="home">
+          <div className="hero">
+            <h1 className="hero-title">Welcome to Our Financial Dashboard</h1>
+            <p className="hero-subtitle">Manage your finances with ease and precision.</p>
+          </div>
+        </div>
       </header>
+      <main>
+        <button className="cta-button" onClick={handleButtonClick}> View Balance Sheet </button>
+      </main>
     </div>
   );
-}
+};
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/balance-sheet" element={<BalanceSheetTable />} />
+        </Routes>
+        <footer className="App-footer">
+          <p>© 2024 My Company</p>
+        </footer>
+      </div>
+    </Router>
+  );
+};
 
 export default App;
