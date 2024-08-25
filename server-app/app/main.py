@@ -5,6 +5,7 @@ from routers import balance_sheet
 
 app = FastAPI()
 
+app.run(debug=False)
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
@@ -63,3 +64,4 @@ async def custom_404_handler(request: Request, exc):
         status_code=404,
         content={"message": "Unknown endpoint"},
     )
+
