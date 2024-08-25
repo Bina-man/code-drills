@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services.balance_sheet import fetch_balance_sheet
+from services.balance_sheet import fetch_balance_sheet
 
 router = APIRouter()
 
