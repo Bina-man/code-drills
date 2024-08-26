@@ -12,10 +12,10 @@ const BalanceSheetTable: React.FC = () => {
     const loadData = async () => {
       try {
         const data = await fetchBalanceSheet();
-        setReport(data[0]); // Assuming you're returning an array of reports and you're interested in the first one
-        setLoading(false);
+        setReport(data[0]);
       } catch (err) {
-        setError('Failed to fetch balance sheet data');
+        setError('Failed to fetch balance sheet data. Please try again later.');
+      } finally {
         setLoading(false);
       }
     };
@@ -35,35 +35,67 @@ const BalanceSheetTable: React.FC = () => {
       <React.Fragment key={index}>
         {row.RowType === 'Section' && (
           <>
-            <tr onClick={() => toggleSection(row.Title || `section-${index}`)} style={{ cursor: 'pointer' }}>
-              <td colSpan={3}><strong>{row.Title}</strong></td>
+            <tr
+              onClick={() => toggleSection(row.Title || `section-${index}`)}
+              style={{
+                cursor: 'pointer',
+                backgroundColor: '#E8F0FE',
+                color: '#333',
+                padding: '12px 16px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+              }}
+            >
+              <td colSpan={3} style={{ padding: '12px 16px' }}>
+                {row.Title}
+                <span style={{ float: 'right', fontSize: '14px', color: '#555' }}>
+                  {expandedSections[row.Title || `section-${index}`] ? 'Hide Details' : 'See More'}
+                </span>
+              </td>
             </tr>
-            {expandedSections[row.Title || `section-${index}`] && row.Rows && renderRows(row.Rows)}
+            {expandedSections[row.Title || `section-${index}`] && row.Rows && (
+              <>
+                {renderRows(row.Rows)}
+                <tr style={{ backgroundColor: '#F9FAFB' }}>
+                  <td colSpan={3} style={{ padding: '12px 16px', fontWeight: 'bold' }}>
+                    Summary of {row.Title}
+                  </td>
+                </tr>
+              </>
+            )}
           </>
         )}
         {row.RowType === 'Row' && (
-          <tr>
+          <tr style={{ backgroundColor: '#fff', borderBottom: '1px solid #ddd' }}>
             {row.Cells.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell.Value}</td>
+              <td key={cellIndex} style={{ padding: '12px 16px', fontSize: '16px' }}>
+                {cell.Value}
+              </td>
             ))}
           </tr>
         )}
       </React.Fragment>
     ));
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-  if (!report) return <p>No data available</p>;
+  if (loading) return <p>Loading balance sheet data...</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (!report) return <p>No data available.</p>;
 
   return (
-    <div>
-      <h2>{report.ReportName}</h2>
-      <table>
+    <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+      <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>{report.ReportName}</h2>
+      <table
+        style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        }}
+      >
         <thead>
-          <tr>
-            <th>Account</th>
-            <th>Amount (Current)</th>
-            <th>Amount (Previous)</th>
+          <tr style={{ backgroundColor: '#4A5568', color: '#fff', fontSize: '18px' }}>
+            <th style={{ padding: '12px 16px', textAlign: 'left' }}>Account</th>
+            <th style={{ padding: '12px 16px', textAlign: 'left' }}>Amount (Current)</th>
+            <th style={{ padding: '12px 16px', textAlign: 'left' }}>Amount (Previous)</th>
           </tr>
         </thead>
         <tbody>{renderRows(report.Rows)}</tbody>
