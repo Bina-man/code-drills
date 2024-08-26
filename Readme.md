@@ -57,6 +57,12 @@ Before you begin, ensure you have the following software installed:
         Docker
     CICD    
         Github actions
+## Results
+
+Below is a GIF showcasing the balance sheet table in action:
+
+![GIF of Balance Sheet Table](image/fresult.gif)
+
 ## Future Enhancements
     - Implement authentication and authorization for secure access to Xero data
     - Add support for additional Xero reports (e.g., Profit and Loss, Cash Flow)
