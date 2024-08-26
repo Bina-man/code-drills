@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { fetchBalanceSheet } from '../services/api';
-import { Report, Row } from '../type';
+// src/components/BalanceSheetTable.tsx
+import React, { useState } from 'react';
+import useBalanceSheetData from '../hooks/useBalanceSheetData';
+import RenderRows from './RenderRows';
 
 const BalanceSheetTable: React.FC = () => {
-  const [report, setReport] = useState<Report | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { report, loading, error, summaries } = useBalanceSheetData();
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await fetchBalanceSheet();
-        setReport(data[0]); // Assuming you're returning an array of reports and you're interested in the first one
-        setLoading(false);
-      } catch (err) {
-        setError('Failed to fetch balance sheet data');
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
 
   const toggleSection = (title: string) => {
     setExpandedSections((prev) => ({
@@ -30,43 +14,23 @@ const BalanceSheetTable: React.FC = () => {
     }));
   };
 
-  const renderRows = (rows: Row[]) =>
-    rows.map((row, index) => (
-      <React.Fragment key={index}>
-        {row.RowType === 'Section' && (
-          <>
-            <tr onClick={() => toggleSection(row.Title || `section-${index}`)} style={{ cursor: 'pointer' }}>
-              <td colSpan={3}><strong>{row.Title}</strong></td>
-            </tr>
-            {expandedSections[row.Title || `section-${index}`] && row.Rows && renderRows(row.Rows)}
-          </>
-        )}
-        {row.RowType === 'Row' && (
-          <tr>
-            {row.Cells.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell.Value}</td>
-            ))}
-          </tr>
-        )}
-      </React.Fragment>
-    ));
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-  if (!report) return <p>No data available</p>;
+  if (loading) return <p>Loading balance sheet data...</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (!report) return <p>No data available.</p>;
 
   return (
-    <div>
-      <h2>{report.ReportName}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Account</th>
-            <th>Amount (Current)</th>
-            <th>Amount (Previous)</th>
-          </tr>
-        </thead>
-        <tbody>{renderRows(report.Rows)}</tbody>
+    <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+      <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>{report.ReportName}</h2>
+      <table
+        style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <tbody>
+          <RenderRows rows={report.Rows} expandedSections={expandedSections} toggleSection={toggleSection} summaries={summaries} />
+        </tbody>
       </table>
     </div>
   );

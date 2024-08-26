@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import BalanceSheetTable from './components/BalanceSheetTable';
 import './App.css';
+import Footer from './components/Footer';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const App: React.FC = () => {
           <Route path="/balance-sheet" element={<BalanceSheetTable />} />
         </Routes>
         <footer className="App-footer">
-          <p>© 2024 My Company</p>
+          <Footer/>
         </footer>
       </div>
     </Router>
