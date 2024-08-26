@@ -1,11 +1,10 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from routers import balance_sheet
+from app.routers import balance_sheet, calculate_section_summary
 
 app = FastAPI()
 
-app.run(debug=False)
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
@@ -25,6 +24,7 @@ Returns:
 """
 
 app.include_router(balance_sheet.router)
+app.include_router(calculate_section_summary.router)
 """
 Includes the balance_sheet router to handle balance sheet-related endpoints.
 
