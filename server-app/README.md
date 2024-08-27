@@ -13,14 +13,30 @@ This project is a backend service built using FastAPI. It provides API endpoints
     │   ├── main.py
     │   ├── config
     │   │   └── balance_types.py
+    │   │   └── env.py
+    │   ├── models
+    │   │   └── organization.py
+    │   │   └── report.py
     │   ├── routers
     │   │   └── balance_sheet.py
+    │   │   └── organization.py
+    │   │   └── report.py
     │   └── services
-    │       └── balance_sheet.py
+    │   |   └── balance_sheet.py
+    │   |   └── organization.py
+    │   |   └── report.py
+    │   └── utils
+    │       └── date_utils.py
     ├── requirements.txt
     └── tests
         ├── test_auth.py
         └── test_endpoint.py
+        └── services
+        |   └── test_organization_service.py
+        |   └── test_report_service.py
+        └── utils
+            └── test_extract_report_date.py
+            
 ```
 
 ## Key Directories and Files:
