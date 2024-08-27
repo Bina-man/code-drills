@@ -16,7 +16,9 @@ const BalanceSheetPage: React.FC = () => {
         organizationName={report.ReportTitles[1]}
         reportDate={new Date(report.ReportDate).toLocaleDateString()}
       />
-      <BalanceSheetTable report={report} summaries={summaries} />
+      <div style={{ flexGrow: 1, width: '100%', padding: '0 20px', backgroundColor: '#f4f4f4' }}>
+        <BalanceSheetTable report={report} summaries={summaries} />
+      </div>
     </div>
   );
 };

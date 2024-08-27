@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RenderRows from './RenderRows';
 import { TableContainer, TableTitle } from '../../styles/balanceSheetStyles';
+import RenderRows from '../RenderRows/RenderRows';
 
 interface BalanceSheetTableProps {
   report: any;
@@ -21,9 +21,7 @@ const BalanceSheetTable: React.FC<BalanceSheetTableProps> = ({ report, summaries
     <TableContainer>
       <TableTitle>{report.ReportName}</TableTitle>
       <table>
-        <tbody>
           <RenderRows rows={report.Rows} expandedSections={expandedSections} toggleSection={toggleSection} summaries={summaries} />
-        </tbody>
       </table>
     </TableContainer>
   );

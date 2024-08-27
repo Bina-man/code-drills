@@ -1,49 +1,56 @@
 .sectionHeader {
-    cursor: pointer;
-    background-color: #E8F0FE;
-    color: #333;
-    padding: 12px 16px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .sectionTitle {
-    padding: 12px 16px;
-  }
-  
-  .sectionToggle {
-    float: right;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .tableHeader {
-    background-color: #4A5568;
-    color: #fff;
-    font-size: 18px;
-  }
-  
-  .tableHeaderCell {
-    padding: 12px 16px;
-    text-align: left;
-  }
-  
-  .summaryRow {
-    background-color: #F9FAFB;
-  }
-  
-  .summaryCell {
-    padding: 12px 16px;
-    font-weight: bold;
-  }
-  
-  .dataRow {
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .dataCell {
-    padding: 12px 16px;
-    font-size: 16px;
-  }
-  
+  cursor: pointer;
+  background-color: #E8F0FE;
+  color: #333;
+  padding: 12px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%; /* Ensure the section header spans the full width */
+}
+
+.sectionTitle {
+  padding: 12px 16px;
+  width: 100%; /* Ensure the section title spans the full width */
+}
+
+.sectionToggle {
+  float: right;
+  font-size: 14px;
+  color: #555;
+}
+
+.tableHeader {
+  background-color: #4A5568;
+  color: #fff;
+  font-size: 18px;
+  width: 100%; /* Ensure the table header spans the full width */
+}
+
+.tableHeaderCell {
+  padding: 12px 16px;
+  text-align: left;
+  width: 33%; /* Distribute cells evenly across the table width */
+}
+
+.summaryRow {
+  background-color: #F9FAFB;
+  width: 100%; /* Ensure the summary row spans the full width */
+}
+
+.summaryCell {
+  padding: 12px 16px;
+  font-weight: bold;
+  width: 100%; /* Ensure the summary cell spans the full width */
+}
+
+.dataRow {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  width: 100%; /* Ensure the data row spans the full width */
+}
+
+.dataCell {
+  padding: 12px 16px;
+  font-size: 16px;
+  width: 33%; /* Distribute cells evenly across the table width */
+}
