@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import useBalanceSheetData from '../hooks/useBalanceSheetData';
 import RenderRows from './RenderRows';
+import OrganizationHeader from './OrganizationHeader';
 
 const BalanceSheetTable: React.FC = () => {
   const { report, loading, error, summaries } = useBalanceSheetData();
@@ -20,7 +21,15 @@ const BalanceSheetTable: React.FC = () => {
 
   return (
     <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
+      {/* Use the new OrganizationHeader component */}
+      <OrganizationHeader 
+        organizationName={report.ReportTitles[1]} 
+        reportDate={report.ReportTitles[2]} 
+      />
+   
+      {/* Report Title */}
       <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>{report.ReportName}</h2>
+      
       <table
         style={{
           width: '100%',

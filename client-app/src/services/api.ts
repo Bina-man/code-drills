@@ -34,3 +34,15 @@ export const getSummary = async (organizationName: string, reportId: string, rep
     throw error; // Rethrow the error to be caught in your component
   }
 };
+
+export const getOrganizationDetails = async (reportId: string, reportType: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/organization/details`, {
+      params: { report_id: reportId, report_type: reportType },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching organization details:', error);
+    throw error;
+  }
+};
