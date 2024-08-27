@@ -1,7 +1,9 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import balance_sheet, calculate_section_summary
+from app.routers.organization import router as organization_router
+from app.routers.report import router as report_router
+from app.routers import balance_sheet
 
 app = FastAPI()
 
@@ -24,7 +26,8 @@ Returns:
 """
 
 app.include_router(balance_sheet.router)
-app.include_router(calculate_section_summary.router)
+app.include_router(organization_router, prefix="/api/organization")
+app.include_router(report_router, prefix="/api/report")
 """
 Includes the balance_sheet router to handle balance sheet-related endpoints.
 

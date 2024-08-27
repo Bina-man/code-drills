@@ -1,5 +1,8 @@
 from setuptools import setup, find_packages
 
+with open("requirements.txt") as f:
+    requirements = f.read().splitlines()
+
 setup(
     name='server_app',
     version='1.0.0',
@@ -21,4 +24,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.9',
+    install_requires=requirements
 )
