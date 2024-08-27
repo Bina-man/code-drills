@@ -20,27 +20,26 @@ const BalanceSheetTable: React.FC = () => {
   if (!report) return <p>No data available.</p>;
 
   return (
-    <div style={{ width: '100%', padding: '20px', boxSizing: 'border-box' }}>
-      {/* Use the new OrganizationHeader component */}
-      <OrganizationHeader 
-        organizationName={report.ReportTitles[1]} 
-        reportDate={report.ReportTitles[2]} 
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
+      <OrganizationHeader
+        organizationName={report.ReportTitles[1]}
+        reportDate={new Date(report.ReportDate).toLocaleDateString()}
       />
-   
-      {/* Report Title */}
-      <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>{report.ReportName}</h2>
-      
-      <table
-        style={{
-          width: '100%',
-          borderCollapse: 'collapse',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <tbody>
-          <RenderRows rows={report.Rows} expandedSections={expandedSections} toggleSection={toggleSection} summaries={summaries} />
-        </tbody>
-      </table>
+      <div style={{ flexGrow: 1, padding: '20px', backgroundColor: '#f4f4f4' }}>
+        <h2 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '20px' }}>{report.ReportName}</h2>
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#e7edf8',
+          }}
+        >
+          <tbody>
+            <RenderRows rows={report.Rows} expandedSections={expandedSections} toggleSection={toggleSection} summaries={summaries} />
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
