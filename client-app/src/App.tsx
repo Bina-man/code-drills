@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import Footer from './components/Footer';
 import BalanceSheetPage from './components/balance-sheet/BalanceSheetPage';
+import Footer from './components/Footer/Footer';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
