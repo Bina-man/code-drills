@@ -43,6 +43,7 @@ export const LoginLogoutButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 50px;
 `;
 
 export const TableContainer = styled.div`
