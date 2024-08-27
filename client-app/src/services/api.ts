@@ -1,16 +1,48 @@
-// src/services/api.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/balance-sheet';
+const API_URL = 'http://localhost:8000';  // Update base URL to reflect the API endpoint without the `/balance-sheet` path
 
+// Fetch the balance sheet data
 export const fetchBalanceSheet = async () => {
   try {
     console.log("Hello world")
-    const response = await axios.get(API_URL);
+    const response = await axios.get(`${API_URL}/balance-sheet`);
     console.log(response)
     return response.data; // Ensure that you return the JSON data
   } catch (error) {
     console.error('Error fetching balance sheet data:', error);
     throw error; // Rethrow the error to be caught in your component
+  }
+};
+
+// Fetch the summary data for a specific section
+export const getSummary = async (organizationName: string, reportId: string, reportType: string, sectionTitle: string) => {
+  try {
+    console.log(`Fetching summary for ${sectionTitle}...`);
+    const response = await axios.get(`${API_URL}/api/report/summary/`, {
+      params: {
+        organization_name: organizationName,
+        report_id: reportId,
+        report_type: reportType,
+        section_title: sectionTitle,
+      },
+    });
+    console.log(`Summary for ${sectionTitle}:`, response.data);
+    return response.data; // Return the JSON data
+  } catch (error) {
+    console.error(`Error fetching summary for ${sectionTitle}:`, error);
+    throw error; // Rethrow the error to be caught in your component
+  }
+};
+
+export const getOrganizationDetails = async (reportId: string, reportType: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/organization/details`, {
+      params: { report_id: reportId, report_type: reportType },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching organization details:', error);
+    throw error;
   }
 };
