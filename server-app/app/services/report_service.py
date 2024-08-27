@@ -21,22 +21,23 @@ class ReportService(ReportModel):
         return None
 
     def calculate_section_summary(self, report_id: str, section_title: str) -> Optional[Dict[str, float]]:
-        # Fetch the balance sheet data
-        reports = self.reports
+        # Check if reports data is None
+        if not self.reports:
+            return None
 
         # Debug: Print the reports data and the provided report_id and report_type
-        print(f"Reports: {reports}")
+        print(f"Reports: {self.reports}")
         print(f"Provided Report ID: {report_id}")
         print(f"Provided Report Type: {self.report_type}")
 
         # Check all report IDs and Types in the data
-        for r in reports:
+        for r in self.reports:
             print(f"Comparing Report ID: {r['ReportID']} == {report_id} -> {r['ReportID'] == report_id}")
             print(f"Comparing Report Type: {r['ReportType']} == {self.report_type} -> {r['ReportType'] == self.report_type}")
 
         # Find the specific report by report_id and report_type
         report = next(
-            (r for r in reports if r['ReportID'] == report_id and r['ReportType'] == self.report_type), None)
+            (r for r in self.reports if r['ReportID'] == report_id and r['ReportType'] == self.report_type), None)
 
         # Debug: Print the selected report
         print(f"Selected Report: {report}")
