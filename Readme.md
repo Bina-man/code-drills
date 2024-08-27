@@ -61,7 +61,7 @@ Before you begin, ensure you have the following software installed:
 
 Below is a GIF showcasing the balance sheet table in action:
 
-![GIF of Balance Sheet Table](image/fresult.gif)
+![GIF of Balance Sheet Table](image/rresult.gif)
 
 ## Future Enhancements
     - Implement authentication and authorization for secure access to Xero data
