@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import BalanceSheetTable from './components/BalanceSheetTable';
 import './App.css';
 import Footer from './components/Footer';
+import BalanceSheetPage from './components/balance-sheet/BalanceSheetPage';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -34,7 +34,11 @@ const App: React.FC = () => {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/balance-sheet" element={<BalanceSheetTable />} />
+          <Route path="/balance-sheet" element={
+            <div>
+            <BalanceSheetPage />
+          </div>
+          } />
         </Routes>
         <footer className="App-footer">
           <Footer/>
