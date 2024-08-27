@@ -1,8 +1,7 @@
 // src/hooks/useBalanceSheetData.ts
 import { useState, useEffect } from 'react';
-import { fetchBalanceSheet } from '../services/api';
-import { getSummary } from '../services/get_summary';
-import { Report } from '../type';
+import { fetchBalanceSheet, getSummary } from '../services/api'; // Ensure the import paths are correct
+import { Report } from '../type'; // Import any necessary types
 
 const useBalanceSheetData = () => {
   const [report, setReport] = useState<Report | null>(null);
@@ -21,7 +20,13 @@ const useBalanceSheetData = () => {
         for (const row of data[0].Rows) {
           if (row.RowType === 'Section' && row.Title) {
             try {
-              const summary = await getSummary(data[0].ReportID, data[0].ReportType, row.Title);
+              // Update this line to include the correct number of arguments
+              const summary = await getSummary(
+                'Demo Org', // Organization name
+                data[0].ReportID, // Report ID
+                data[0].ReportType, // Report Type
+                row.Title // Section Title
+              );
               sectionSummaries[row.Title] = summary;
             } catch (err) {
               console.error(`Failed to fetch summary for ${row.Title}:`, err);

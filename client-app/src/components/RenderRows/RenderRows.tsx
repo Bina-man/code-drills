@@ -1,6 +1,6 @@
-// src/components/RenderRows.tsx
 import React from 'react';
-import { Row } from '../type';
+import { Row } from '../../type';
+import styles from './RenderRows.module.css'; // Assuming you create a CSS module for styles
 
 const RenderRows: React.FC<{ 
   rows: Row[], 
@@ -18,37 +18,29 @@ const RenderRows: React.FC<{
               <>
                 <tr
                   onClick={() => toggleSection(sectionTitle)}
-                  style={{
-                    cursor: 'pointer',
-                    backgroundColor: '#E8F0FE',
-                    color: '#333',
-                    padding: '12px 16px',
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                  }}
+                  className={styles.sectionHeader} // Apply CSS class
                 >
-                  <td colSpan={3} style={{ padding: '12px 16px' }}>
+                  <td colSpan={3} className={styles.sectionTitle}>
                     {row.Title}
-                    <span style={{ float: 'right', fontSize: '14px', color: '#555' }}>
+                    <span className={styles.sectionToggle}>
                       {expandedSections[sectionTitle] ? 'Hide Details' : 'See More'}
                     </span>
                   </td>
                 </tr>
                 {expandedSections[sectionTitle] && row.Rows && (
                   <>
-                    {/* Add a table header when a section is expanded */}
-                    <tr style={{ backgroundColor: '#4A5568', color: '#fff', fontSize: '18px' }}>
-                      <th style={{ padding: '12px 16px', textAlign: 'left' }}>Account</th>
-                      <th style={{ padding: '12px 16px', textAlign: 'left' }}>Amount (Current)</th>
-                      <th style={{ padding: '12px 16px', textAlign: 'left' }}>Amount (Previous)</th>
+                    <tr className={styles.tableHeader}>
+                      <th className={styles.tableHeaderCell}>Account</th>
+                      <th className={styles.tableHeaderCell}>Amount (Current)</th>
+                      <th className={styles.tableHeaderCell}>Amount (Previous)</th>
                     </tr>
 
                     {/* Recursively render nested rows */}
                     <RenderRows rows={row.Rows} expandedSections={expandedSections} toggleSection={toggleSection} summaries={summaries} />
 
                     {/* Add a summary row at the end of each expanded section */}
-                    <tr style={{ backgroundColor: '#F9FAFB' }}>
-                      <td colSpan={3} style={{ padding: '12px 16px', fontWeight: 'bold' }}>
+                    <tr className={styles.summaryRow}>
+                      <td colSpan={3} className={styles.summaryCell}>
                         Summary of {row.Title}: Current - {summaries[sectionTitle]?.sum_current || 'N/A'}, Previous - {summaries[sectionTitle]?.sum_previous || 'N/A'}
                       </td>
                     </tr>
@@ -57,9 +49,9 @@ const RenderRows: React.FC<{
               </>
             )}
             {row.RowType === 'Row' && (
-              <tr style={{ backgroundColor: '#fff', borderBottom: '1px solid #ddd' }}>
+              <tr className={styles.dataRow}>
                 {row.Cells.map((cell, cellIndex) => (
-                  <td key={cellIndex} style={{ padding: '12px 16px', fontSize: '16px' }}>
+                  <td key={cellIndex} className={styles.dataCell}>
                     {cell.Value}
                   </td>
                 ))}
